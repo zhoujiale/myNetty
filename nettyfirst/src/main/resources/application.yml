@@ -1,0 +1,4 @@
+server:
+  servlet:
+    context-path: nettyex
+  port: 8081
