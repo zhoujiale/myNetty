@@ -46,18 +46,16 @@ public class ServerHandler extends SimpleChannelInboundHandler {
 
     //读取数据
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+    protected void channelRead0(ChannelHandlerContext ctx, Object msg) throws Exception {
         Channel inChannel = ctx.channel();
         for(Channel channel:channels){
-             if(channel != inChannel){
-                 channel.writeAndFlush("{"+inChannel.remoteAddress().toString().substring(1)+"}"+"say:"+msg+"\n");
-             }
+            if(channel != inChannel){
+                channel.writeAndFlush("{"+inChannel.remoteAddress().toString().substring(1)+"}"+"say:"+msg+"\n");
+                System.out.println("{"+inChannel.remoteAddress().toString().substring(1)+"}"+"say:"+msg+"\n");
+            }else{
+                channel.writeAndFlush("[you]" + msg + "\n");
+            }
         }
-    }
-
-    @Override
-    protected void channelRead0(ChannelHandlerContext ctx, Object msg) throws Exception {
-
     }
 
     

@@ -51,13 +51,11 @@ public class Client {
             System.out.println("启动客户端");
             ChannelFuture f = bootstrap.connect(host,port);
             Channel cn = f.channel();
-            System.out.println(cn.localAddress().toString().substring(1));
             Scanner scanner = new Scanner(System.in);
             while(scanner.hasNextLine()){
               String msg = scanner.nextLine();
               cn.writeAndFlush(msg);
             }
-
         }finally {
             clientGroup.shutdownGracefully();
         }
