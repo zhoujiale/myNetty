@@ -16,19 +16,11 @@ import io.netty.channel.SimpleChannelInboundHandler;
  *Date 2019/3/19 13:31
  *@Version 1.0
  **/
-public class ClientHandler extends SimpleChannelInboundHandler {
+public class ClientHandler extends SimpleChannelInboundHandler<String> {
+
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-    }
-
-    @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        super.exceptionCaught(ctx, cause);
-    }
-
-    @Override
-    protected void channelRead0(ChannelHandlerContext ctx, Object msg) throws Exception {
-        System.out.println(((String) msg).trim());
+    protected void channelRead0(ChannelHandlerContext ctx, String s) throws Exception {
+        System.out.println(s.trim());
     }
 }
